@@ -1,0 +1,51 @@
+#baseURL: https://piperift.com/InventoryExtension/
+locale: en-us
+title: Inventory Extension
+theme: hextra
+
+markup:
+  # allow raw html
+  goldmark:
+    renderer:
+      unsafe: true
+
+  # enable hextra syntax highlight
+  highlight:
+    noClasses: false
+
+menu:
+  main:
+    - name: Documentation
+      pageRef: /
+      weight: 1
+    - name: Requests & Reports
+      url: "https://code.piperift.com/Piperift/InventoryExtension/issues"
+      weight: 2
+    - name: Roadmap
+      url: "https://code.piperift.com/Piperift/InventoryExtension/projects/3"
+      weight: 3
+    - name: Search
+      weight: 4
+      params:
+        type: search
+    - name: FAB
+      weight: 5
+      url: "https://fab.com"
+      params:
+        icon: fab
+
+params:
+  navbar:
+    displayTitle: true
+    displayLogo: false
+
+  footer:
+    displayCopyright: true
+    displayPoweredBy: true
+
+  editURL:
+    enable: true
+    base: "https://github.com/Piperift/InventoryExtension/edit/main/content"
+
+  imageZoom:
+    enable: true
