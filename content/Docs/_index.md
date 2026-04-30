@@ -13,9 +13,9 @@ For installing manually, you can do it like any other plugin ([See how](https://
 **Inventory Extension** is a plugin composed by three different modules:
 
 {{< cards >}}
-  {{< card link="Docs/Inventory" title="Inventory" icon="book-open" subtitle="The main module of the plugin, provides the **inventory** itself and **items**." >}}
-  {{< card link="Docs/Loot" title="Loot" icon="book-open" subtitle="Provides **looting**, where items can be randomly obtained using item queues.">}}
-  {{< card link="Docs/Craft" title="Craft" icon="book-open" subtitle="Provides **crafting**, where items can be converted into other items.">}}
+  {{< card link="docs/Inventory" title="Inventory" icon="book-open" subtitle="The main module of the plugin, provides the **inventory** itself and **items**." >}}
+  {{< card link="docs/Loot" title="Loot" icon="book-open" subtitle="Provides **looting**, where items can be randomly obtained using item queues.">}}
+  {{< card link="docs/Craft" title="Craft" icon="book-open" subtitle="Provides **crafting**, where items can be converted into other items.">}}
 {{< /cards >}}
 
 **Craft** and **Loot** are **independent and optional**, meaning, if you dont need them you can just ignore them or even remove them.

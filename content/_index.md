@@ -23,7 +23,7 @@ layout: hextra-home
 </div>
 
 <div class="hx:mb-6">
-{{< hextra/hero-button text="Documentation" link="Docs" >}}
+{{< hextra/hero-button text="Documentation" link="docs" >}}
 </div>
 
 <div class="flex justify-start mb-3">
@@ -36,21 +36,21 @@ layout: hextra-home
   {{< hextra/feature-card
     title="Inventory"
     subtitle="Items, Inventories, weights, limits, durability..."
-    link="Docs/Inventory"
+    link="docs/Inventory"
     class="hx:aspect-auto hx:max-md:min-h-[128px]"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(59, 205, 221, 0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="Crafting"
     subtitle="Craft items from other items, recipes, crafting stations..."
-    link="Docs/Craft"
+    link="docs/Craft"
     class="hx:aspect-auto hx:max-lg:min-h-[128px]"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="Looting"
     subtitle="Randomized items, item queues, shared drops..."
-    link="Docs/Loot"
+    link="docs/Loot"
     class="hx:aspect-auto hx:max-md:min-h-[128px]"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142, 83, 53, 0.15),hsla(0,0%,100%,0));"
   >}}
