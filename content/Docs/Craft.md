@@ -1,7 +1,10 @@
+---
+weight: "2"
+---
 # Craft
-> [!WARNING] If you have not already, it is recommended to read about  [Inventory](Inventory.md)  before Craft
+Crafting allow items to be created from other items using recipes.
 
-> [!TIP]
-> Most variables, functions and classes have descriptions when you hover over them:
->
-> ![](Assets/20260409222222.png)
+> [!Important]
+> If you have not already, it is recommended to read about  [Inventory]({{< ref "Inventory.md" >}})  before this page.
+
+> [!Warning] Documentation In Progress

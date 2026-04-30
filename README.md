@@ -1,3 +1,5 @@
 # Inventory Extension (Documentation only)
 
-See in [Fab](https://fab.com)
+Available in [FAB](https://fab.com)
+
+## [Documentation](https://piperift.com/InventoryExtension)

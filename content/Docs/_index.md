@@ -23,7 +23,7 @@ For installing manually, you can do it like any other plugin ([See how](https://
 > [!tip]
 > Most variables, functions and classes have descriptions when you hover over them:
 > 
-> ![](Docs/Assets/20260409222222.png)
+> ![](Assets/20260409_1.png)
 
 ## FAQ
 ### Can Items be created in runtime?
