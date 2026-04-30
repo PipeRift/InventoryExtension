@@ -4,4 +4,4 @@
 > [!TIP]
 > Most variables, functions and classes have descriptions when you hover over them:
 >
-> ![](Assets/Pasted%20image%2020260409222222.png)
+> ![](Assets/20260409222222.png)

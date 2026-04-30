@@ -1,11 +1,11 @@
 # Inventory
 The main module of the plugin, provides the **inventories**, **items** and other base features.
-![](Assets/Pasted%20image%2020260419150632.png)
+![](Assets/20260419150632.png)
 ## Item Descriptors
 Item descriptors are assets that, as the name suggests, describe an item: How it behaves, how it looks, what it can do, etc.
 
 The two most defining elements of a descriptor are *Fragments* and *Parameters*.
-![](Assets/Pasted%20image%2020260419234446.png)
+![](Assets/20260419234446.png)
 ## Item Fragments
 An Item Descriptor can have one or more *Fragments* that define the capabilities of the item.
 Item Fragments are blueprints and can be scripted both in CPP and in blueprints.
@@ -22,17 +22,17 @@ Custom fragment examples you could implement:
 
 If you are working with GAS, fragments can do things like grant abilities when the item is added or on events, remove them when the item is removed, apply effects, etc.
 
-> [!TIP] You can add a display names and icons to item fragments for better readability
-> ![](Assets/Pasted%20image%2020260419205906.png)![](Assets/Pasted%20image%2020260419210055.png)
+> [!TIP]- You can add a display names and icons to item fragments for better readability
+> ![](Assets/20260419205906.png)![](Assets/20260419210055.png)
 
 ### Creating a Fragment Type
 Fragments must inherit `UIEItemFragment`.
 
 {{< details title="Blueprints" >}}
-<!--![](../Assets/Pasted%20image%2020260419205906.png)-->
+![](Assets/20260419205906.png)
 {{< /details >}}
 
-{{< details title="CPP" closed="true" >}}
+{{< details title="C++" closed="true" >}}
 ```cpp
 #include <IEItemDescriptor.h>
 
@@ -84,9 +84,9 @@ If there is not enough space for a certain Item, that is considered "Excess" and
 
 > [!NOTE]- Blueprints
 > 
-> ![](Assets/Pasted%20image%2020260409193233.png)
+> ![](Assets/20260409193233.png)
 
-> [!NOTE]- CPP
+> [!NOTE]- Cpp
 > ```cpp
 > // Add one item
 > Inventory->AddItem(Item, Excess);

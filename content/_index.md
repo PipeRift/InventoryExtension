@@ -1,44 +1,81 @@
 ---
 title: Inventory Extension
-toc: true
+layout: hextra-home
 ---
 
 
-A 3-in-1 inventory system for Unreal Engine with **inventories**, **looting** and **crafting**.
+{{< hextra/hero-badge link="https://www.fab.com/" >}}
+  <div class="hx:w-2 hx:h-2 hx:rounded-full hx:bg-primary-400"></div>
+  <span>Available on {{<icon name="fab" attributes="height=12, width=28">}}</span>
+  {{< icon name="arrow-circle-right" attributes="height=14" >}}
+{{< /hextra/hero-badge >}}
 
-## FAB & Installation
-This plugin is available for sale in FAB [HERE](https://www.unrealengine.com/marketplace/inventory-extension) and can be installed using Epic Games's Launcher.
-For installing manually, you can do it like any other plugin ([See how](https://unreal-garden.com/tutorials/how-to-install-plugin/)).
-## Modules
-**Inventory Extension** is a plugin composed by three different modules:
+<div class="hx:mt-6 hx:mb-6">
+{{< hextra/hero-headline >}}
+  A modern & flexible&nbsp;<br class="hx:sm:block hx:hidden"/>inventory system
+{{< /hextra/hero-headline >}}
+</div>
 
-{{< cards >}}
-  {{< card link="Docs/Inventory" title="Inventory" icon="book-open" subtitle="The main module of the plugin, provides the **inventory** itself and **items**." >}}
-  {{< card link="Docs/Loot" title="Loot" icon="book-open" subtitle="Provides **looting**, where items can be randomly obtained using item queues.">}}
-  {{< card link="Docs/Craft" title="Craft" icon="book-open" subtitle="Provides **crafting**, where items can be converted into other items.">}}
-{{< /cards >}}
+<div class="hx:mb-12">
+{{< hextra/hero-subtitle >}}
+  Fast & reliable inventories, crafting and looting&nbsp;<br class="hx:sm:block hx:hidden"/>for your projects
+{{< /hextra/hero-subtitle >}}
+</div>
 
-**Craft** and **Loot** are **independent and optional**, meaning, if you dont need them you can just ignore them or even remove them.
+<div class="hx:mb-6">
+{{< hextra/hero-button text="Documentation" link="Docs" >}}
+</div>
 
-> [!tip]
-> Most variables, functions and classes have descriptions when you hover over them:
-> 
-> ![](Docs/Assets/Pasted%20image%2020260409222222.png)
+<div class="flex justify-start mb-3">
+  <div class="bg-dots"></div>
+</div>
 
-## FAQ
-### Can Items be created in runtime?
-Yes. You have two main ways. You can create item descriptor assets in runtime, or you can use parameters to customize the properties of an item, or both.
+<div class="hx:mt-6"></div>
 
-For example, <span style="color:orange">I want a weapon to spawn with random damage in a range</span>:
-I can <span style="color:green">assign a damage parameter</span> and give it a value of my choice when creating the spawned item.
-### Does it support GAS (Gameplay Ability System)?
-While this plugins doesn't directly integrate GAS for dependency reasons, it has been used before with it and all concepts of the plugin are friendly to it, so you can easily integrate it in your projects.
-
-## Design pillars of the plugin
-This plugin is designed to be:
-- **Extensible** and **Scriptable**: Designed to be extended with **cpp and blueprints** in a modular way.
-- **Easy to use**: Custom editors simplify editing and creating content in scale.
-- **Replicated**: Work on multiplayer projects.
-- **Performant**
-	- **UObjects are avoided when possible**: Reduces memory footprint
-	- **Batch operations are preferred**: Do one time 100 Somethings,  instead of do 100 times Something
+{{< hextra/feature-grid >}}
+  {{< hextra/feature-card
+    title="Inventory"
+    subtitle="Items, Inventories, weights, limits, durability..."
+    link="Docs/Inventory"
+    class="hx:aspect-auto hx:max-md:min-h-[128px]"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(59, 205, 221, 0.15),hsla(0,0%,100%,0));"
+  >}}
+  {{< hextra/feature-card
+    title="Crafting"
+    subtitle="Craft items from other items, recipes, crafting stations..."
+    link="Docs/Craft"
+    class="hx:aspect-auto hx:max-lg:min-h-[128px]"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
+  >}}
+  {{< hextra/feature-card
+    title="Looting"
+    subtitle="Randomized items, item queues, shared drops..."
+    link="Docs/Loot"
+    class="hx:aspect-auto hx:max-md:min-h-[128px]"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(142, 83, 53, 0.15),hsla(0,0%,100%,0));"
+  >}}
+{{< /hextra/feature-grid >}}
+<div class="hx:mt-4"></div>
+{{< hextra/feature-grid >}}
+  {{< hextra/feature-card
+    title="Replicated"
+    subtitle="Replicate items, inventories and crafting across clients."
+  >}}
+  {{< hextra/feature-card
+    title="Lightweight by Design"
+    subtitle="Reduced dependencies, fast build times, and performant."
+  >}}
+{{< /hextra/feature-grid >}}
+<div class="hx:mt-4"></div>
+{{< hextra/feature-grid >}}
+  {{< hextra/feature-card
+    title="Public Roadmap"
+    subtitle="See planned and past work."
+    link="https://code.piperift.com/Piperift/InventoryExtension/projects/3"
+  >}}
+  {{< hextra/feature-card
+    title="Public Issues"
+    subtitle="Request new features or report bugs"
+    link="https://code.piperift.com/Piperift/InventoryExtension/issues"
+  >}}
+{{< /hextra/feature-grid >}}

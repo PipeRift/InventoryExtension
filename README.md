@@ -1,3 +1,3 @@
 # Inventory Extension (Documentation only)
 
-See in [Fab]()
+See in [Fab](https://fab.com)

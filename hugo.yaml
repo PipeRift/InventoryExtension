@@ -16,13 +16,13 @@ markup:
 menu:
   main:
     - name: Documentation
-      pageRef: /
+      pageRef: /Docs/
       weight: 1
-    - name: Requests & Reports
-      url: "https://code.piperift.com/Piperift/InventoryExtension/issues"
-      weight: 2
     - name: Roadmap
       url: "https://code.piperift.com/Piperift/InventoryExtension/projects/3"
+      weight: 2
+    - name: Requests & Reports
+      url: "https://code.piperift.com/Piperift/InventoryExtension/issues"
       weight: 3
     - name: Search
       weight: 4
@@ -35,6 +35,8 @@ menu:
         icon: fab
 
 params:
+  fab: https://fab.com
+
   navbar:
     displayTitle: true
     displayLogo: false
