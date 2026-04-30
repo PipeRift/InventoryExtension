@@ -16,7 +16,7 @@ markup:
 menu:
   main:
     - name: Documentation
-      pageRef: /Docs/
+      pageRef: /docs/
       weight: 1
     - name: Roadmap
       url: "https://code.piperift.com/Piperift/InventoryExtension/projects/3"

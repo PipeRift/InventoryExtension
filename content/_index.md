@@ -36,21 +36,21 @@ layout: hextra-home
   {{< hextra/feature-card
     title="Inventory"
     subtitle="Items, Inventories, weights, limits, durability..."
-    link="docs/Inventory"
+    link="docs/inventory"
     class="hx:aspect-auto hx:max-md:min-h-[128px]"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(59, 205, 221, 0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="Crafting"
     subtitle="Craft items from other items, recipes, crafting stations..."
-    link="docs/Craft"
+    link="docs/craft"
     class="hx:aspect-auto hx:max-lg:min-h-[128px]"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="Looting"
     subtitle="Randomized items, item queues, shared drops..."
-    link="docs/Loot"
+    link="docs/loot"
     class="hx:aspect-auto hx:max-md:min-h-[128px]"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142, 83, 53, 0.15),hsla(0,0%,100%,0));"
   >}}
