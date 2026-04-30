@@ -172,7 +172,7 @@ We use the inventory slot of the item for this.
 
 {{< details title="C++" >}}
 ```cpp
-// Add one item
+// Get the slot we will drop
 UIEInventorySlot* Slot = Inventory->FindFirstSlotByItem(ItemDescriptor);
 // If it is valid
 Slot->DropItem(...);
