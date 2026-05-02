@@ -4,7 +4,7 @@ layout: hextra-home
 ---
 
 
-{{< hextra/hero-badge link="https://www.fab.com/" >}}
+{{< hextra/hero-badge link="https://www.fab.com/listings/72840275-7621-4fb5-82cc-97ab7e0a38aa" >}}
   <div class="hx:w-2 hx:h-2 hx:rounded-full hx:bg-primary-400"></div>
   <span>Available on {{<icon name="fab" attributes="height=12, width=28">}}</span>
   {{< icon name="arrow-circle-right" attributes="height=14" >}}

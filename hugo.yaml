@@ -30,12 +30,12 @@ menu:
         type: search
     - name: FAB
       weight: 5
-      url: "https://fab.com"
+      url: "https://www.fab.com/listings/72840275-7621-4fb5-82cc-97ab7e0a38aa"
       params:
         icon: fab
 
 params:
-  fab: https://fab.com
+  fab: https://www.fab.com/listings/72840275-7621-4fb5-82cc-97ab7e0a38aa
 
   navbar:
     displayTitle: true
