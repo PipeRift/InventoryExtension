@@ -9,11 +9,11 @@ Items follow a hierarchical relationship:<br>
 **Item Descriptor (Asset) -> Item (Struct)**
 ![Inventory Architecture](Assets/20260419.png)
 
-### Item Descriptors
+### Item Descriptor
 `UIEItemDescriptor` -- <span style="color:#ba6ed8">Data Asset</span>
 
 Item descriptors define an item statically.
-They are modular using [Fragments](#item-fragments) for static logic and [Parameters](#item-parameters) for runtime data.
+They are modular using [Fragments](#item-fragment) for static logic and [Parameters](#item-parameter) for runtime data.
 
 The two most defining elements of a descriptor are *Fragments* and *Parameters*.
 ![](Assets/20260419_6.png)
@@ -25,7 +25,7 @@ When we work with items we usually refer to Struct instances of items (`FIEItem`
 
 Unlike other inventory systems in unreal, items are not uobjects, so they can be copied and worked with out of the box like any other struct.
 
-### Item Fragments
+### Item Fragment
 `UIEItemFragment` -- <span style="color:#ba6ed8">UObject</span> -- Inside a Descriptor
 
 An Item Descriptor can have one or more *Fragments* that define the capabilities of the item.
@@ -47,7 +47,7 @@ If you are working with GAS, fragments can do things like grant abilities when t
 > 1. ![](Assets/20260419_4.png)
 > 2. ![](Assets/20260419_5.png)
 
-### Item Parameters
+### Item Parameter
 `FIEItemParameter` -- <span style="color:#6e72d8">Struct</span> -- <span style="color:yellow">Replicates</span> -- Inside a Descriptor or an Item
 
 Parameters are runtime data bound to an item instance (`FIEItem`) and identified by a gameplay tag. This data is usually in the form of structs, or literals like integers, floats or bools.
@@ -110,16 +110,16 @@ Inventory->AddItems(Items, Excess);
 ##### Understanding the Editor
 ![](Assets/20260503_1.png)
 1. **Details**: Contains all item properties like Display Name or Description, and can control some of its behavior.
-2. **Parameters**: Where you edit all **default** [parameters](#item-parameters) of the item
-3. **Fragment List**: Shows all [fragments](#item-fragments) in the item and allows removing them or adding new ones.
-4. **Fragment Details**: Where you edit all properties of the selected [fragment](#item-fragments)
+2. **Parameters**: Where you edit all **default** [parameters](#item-parameter) of the item
+3. **Fragment List**: Shows all [fragments](#item-fragment) in the item and allows removing them or adding new ones.
+4. **Fragment Details**: Where you edit all properties of the selected [fragment](#item-fragment)
 5. **Browser**: Where you can quickly navigate across many Inventory related assets for convenience.
 ##### Creating items
 Creating new items is simple. We create an Item Definition of it and assign fragments and parameters to our liking.
 
 1. Create an Item Descriptor in the Asset Browser
    ![](Assets/20260503.png)
-2. Edit its properties like Name or Weight, and add [fragments](#item-fragments) and [parameters](#item-parameters) accordingly.
+2. Edit its properties like Name or Weight, and add [fragments](#item-fragment) and [parameters](#item-parameter) accordingly.
 
 #### Fragments
 ##### Creating Fragment Types
