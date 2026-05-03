@@ -2,14 +2,32 @@
 weight: "1"
 ---
 # Inventory
-The main module of the plugin, provides the **inventories**, **items** and other base features.
-![](Assets/20260419.png)
-## Item Descriptors
-Item descriptors are assets that, as the name suggests, describe an item: How it behaves, how it looks, what it can do, etc.
+The main module of the plugin, providing networked inventories, items, and extensible data & behavior.
+
+## 1. Architecture
+Items follow a hierarchical relationship:<br>
+**Item Descriptor (Asset) -> Item (Struct)**
+![Inventory Architecture](Assets/20260419.png)
+
+### Item Descriptors
+`UIEItemDescriptor` -- <span style="color:#ba6ed8">Data Asset</span>
+
+Item descriptors define an item statically.
+They are modular using [Fragments](#item-fragments) for static logic and [Parameters](#item-parameters) for runtime data.
 
 The two most defining elements of a descriptor are *Fragments* and *Parameters*.
 ![](Assets/20260419_6.png)
-## Item Fragments
+
+### Item
+`FIEItem` -- <span style="color:#6e72d8">Struct</span> -- <span style="color:yellow">Replicates</span>
+
+When we work with items we usually refer to Struct instances of items (`FIEItem`).
+
+Unlike other inventory systems in unreal, items are not uobjects, so they can be copied and worked with out of the box like any other struct.
+
+### Item Fragments
+`UIEItemFragment` -- <span style="color:#ba6ed8">UObject</span> -- Inside a Descriptor
+
 An Item Descriptor can have one or more *Fragments* that define the capabilities of the item.
 Item Fragments are blueprints and can be scripted both in CPP and in blueprints.
 
@@ -29,7 +47,84 @@ If you are working with GAS, fragments can do things like grant abilities when t
 > 1. ![](Assets/20260419_4.png)
 > 2. ![](Assets/20260419_5.png)
 
-### Creating Fragment Types
+### Item Parameters
+`FIEItemParameter` -- <span style="color:#6e72d8">Struct</span> -- <span style="color:yellow">Replicates</span> -- Inside a Descriptor or an Item
+
+Parameters are runtime data bound to an item instance (`FIEItem`) and identified by a gameplay tag. This data is usually in the form of structs, or literals like integers, floats or bools.
+![](Assets/20260430_3.png)
+
+> [!IMPORTANT] **Overrides**
+> If a parameter is modified on an `FIEItem`, it **overrides** the default value in its `UIEItemDescriptor`.
+
+### Inventory Component
+`UIEInventoryComponent` -- <span style="color:#6eccd8">Actor Component</span> -- <span style="color:yellow">Replicates</span>
+
+A component that holds many items in order. Can have custom behavior.
+
+#### Settings
+The tooltips of the inventory have detailed tooltips that explain their purpose, but here are some:
+![](Assets/20260430_4.png)
+1. **Max Slots**: Maximum number of simultaneous slots allowed
+2. **Unique Slot Tag Limits**: gameplay Tags that limit items allowed by their tags
+3. **Max Total Weight**: Total weight allowed considering the weight of all items in the inventory
+
+> [!Tip]
+> Inventories themselves can be inherited from both in C++ and blueprints to create custom behavior.
+
+#### Replication
+* **Clients** are **Read-Only**. They receive synchronized updates via the `OnSlotsChanged` delegate.
+* All modifications (adding, removing, moving items) must be performed on the **Server**.
+  > [!Tip] Requests to modify from clients can be sent using RPCs by overriding the Inventory or from the Actor.
+* **Component Replication:** The replication of the component is tied to the replication of its owner actor (e.g., an inventory on a Controller will not be available on all clients).
+
+### Inventory Slot
+`UIEInventorySlot` -- <span style="color:#6eccd8">UObject</span> -- Inside an Inventory
+
+Represents occupied space inside an inventory. Usually contains an item, but may be empty.
+
+---
+
+## 2. Usage & Workflow
+
+### Inventories
+#### Adding Items
+Adding Items to an inventory will try to find space for them in existing slots and place them there. 
+
+If there is not enough space for a certain Item, that is considered "**Excess**" and returned.
+
+{{< details title="Blueprints" closed="true" >}}
+![](Assets/20260409.png)
+{{< /details >}}
+
+{{< details title="C++" closed="true" >}}
+```cpp
+// Add one item
+Inventory->AddItem(Item, Excess);
+// Add multiple items
+Inventory->AddItems(Items, Excess);
+```
+{{< /details >}}
+
+### Items
+#### Descriptors
+##### Understanding the Editor
+![](Assets/20260503_1.png)
+1. **Details**: Contains all item properties like Display Name or Description, and can control some of its behavior.
+2. **Parameters**: Where you edit all **default** [parameters](#item-parameters) of the item
+3. **Fragment List**: Shows all [fragments](#item-fragments) in the item and allows removing them or adding new ones.
+4. **Fragment Details**: Where you edit all properties of the selected [fragment](#item-fragments)
+5. **Browser**: Where you can quickly navigate across many Inventory related assets for convenience.
+##### Creating items
+Creating new items is simple. We create an Item Definition of it and assign fragments and parameters to our liking.
+
+1. Create an Item Descriptor in the Asset Browser
+   ![](Assets/20260503.png)
+2. Edit its properties like Name or Weight, and add [fragments](#item-fragments) and [parameters](#item-parameters) accordingly.
+
+#### Fragments
+##### Creating Fragment Types
+To create custom behavior in items, and to reuse functionality across different items, we can create an Item Fragment.
+
 Fragments must inherit `UIEItemFragment`.
 
 {{< details title="Blueprints" closed="true" >}}
@@ -65,14 +160,11 @@ public:
 ```
 {{< /details >}}
 
-
-## Item Parameters
-<span style="color:yellow">Replicates</span><br>
-Parameters are runtime data bound to an item instance (`FIEItem`) and identified by a gameplay tag. This data is usually in the form of structs, or literals like integers, floats or bools.
-![](Assets/20260430_3.png)
-
-### Creating Parameter Types
+#### Parameters
+##### Creating Parameter Types
 While some parameters can be simple literals like ints, floats or bools, others can be complex structs with many variables.
+
+Here is how to define them:
 
 > [!Note]
 > Support for **user defined structs** may come in the future.
@@ -86,10 +178,10 @@ USTRUCT(BlueprintType, DisplayName = "Ammo")
 struct FItemParam_Ammo : public FIEItemParameter
 {
     GENERATED_BODY()
-	
+
 	UPROPERTY(SaveGame, EditAnywhere, BlueprintReadWrite, Category = Parameter)
     FGameplayTag Type;
-    
+
     UPROPERTY(SaveGame, EditAnywhere, BlueprintReadWrite, Category = Parameter)
     int32 Count = 20;
 };
@@ -114,55 +206,17 @@ struct FItemParam_Ammo : public FIEItemParameter
 > ```
 > {{< /details >}}
 
-## Items
-<span style="color:yellow">Replicates</span><br>
-When we work with items we usually refer to Struct instances of items (`FIEItem`).
 
-Unlike other inventory systems in unreal, items are not uobjects, so they can be copied and worked with out of the box like any other struct.
 
-## Inventory Component
-<span style="color:yellow">Replicates</span><br>
-An actor component that can hold many items.
-### Settings
-The tooltips of the inventory have detailed tooltips that explain their purpose, but here are some:
-![](Assets/20260430_4.png)
-1. **Max Slots**: Maximum number of simultaneous slots allowed
-2. **Unique Slot Tag Limits**: gameplay Tags that limit items allowed by their tags
-3. **Max Total Weight**: Total weight allowed considering the weight of all items in the inventory
 
-> [!Tip]
-> Inventories themselves can be inherited from both in C++ and blueprints to create custom behavior.
-### Replication
-There are no restrictions on which actors can have this component, but if you are replicating, keep in mind the replication of the component is the same as that of its owner actor.
-For example, an inventory on a Controller will not be available on all clients.
-### Inventory Slot
-An **UObject** that represents space inside an inventory, that usually is occupied by an item, but may be empty.
-### Usage
-#### Adding Items to an Inventory
-Adding Items to an inventory will try to find space for them in existing slots and place them there.
-
-If there is not enough space for a certain Item, that is considered "**Excess**" and returned.
-
-{{< details title="Blueprints" closed="true" >}}
-![](Assets/20260409.png)
-{{< /details >}}
-
-{{< details title="C++" closed="true" >}}
-```cpp
-// Add one item
-Inventory->AddItem(Item, Excess);
-// Add multiple items
-Inventory->AddItems(Items, Excess);
-```
-{{< /details >}}
-
-## Dropping Items
+#### Dropping
 
 Items can be dropped into the world *if they contain an "**Instantiable**" fragment*.
 
 This fragment defines which actor class to use (though a default one from settings can be used), but this actor class must implement **InstantiatedItem** interface.
 <img src="../Assets/20260430_6.png" width="75%"/>
-### Dropping from an Inventory
+
+##### Dropping from an Inventory
 Items can be dropped from an inventory, optionally removing them from the inventory, and spawning an item actor as requested.
 
 We use the inventory slot of the item for this.
@@ -170,7 +224,7 @@ We use the inventory slot of the item for this.
 ![](Assets/20260430_5.png)
 {{< /details >}}
 
-{{< details title="C++" >}}
+{{< details title="C++" closed="true" >}}
 ```cpp
 // Get the slot we will drop
 UIEInventorySlot* Slot = Inventory->FindFirstSlotByItem(ItemDescriptor);
@@ -178,16 +232,16 @@ UIEInventorySlot* Slot = Inventory->FindFirstSlotByItem(ItemDescriptor);
 Slot->DropItem(...);
 ```
 {{< /details >}}
-### Dropping manually (Spawning)
+
+##### Dropping manually
 Items can also be spawned without an inventory, only spawning an item actor as requested, and not affecting the source item (so you can do with it what you wish).
 
 {{< details title="Blueprints" closed="true" >}}
 ![](Assets/20260430_7.png)
 {{< /details >}}
 
-{{< details title="C++" >}}
+{{< details title="C++" closed="true" >}}
 ```cpp
 Item.Spawn(...);
 ```
 {{< /details >}}
-

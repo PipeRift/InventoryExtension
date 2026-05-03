@@ -26,13 +26,18 @@ For installing manually, you can do it like any other plugin ([See how](https://
 > ![](Assets/20260409_1.png)
 
 ## FAQ
+### Does it support GAS (Gameplay Ability System)?
+While this plugins doesn't directly integrate GAS for dependency reasons, it has been used before with it and all concepts of the plugin are friendly to it, so you can easily integrate it in your projects.
+
 ### Can Items be created in runtime?
 Yes. You have two main ways. You can create item descriptor assets in runtime, or you can use parameters to customize the properties of an item, or both.
 
 For example, <span style="color:orange">I want a weapon to spawn with random damage in a range</span>:
 I can <span style="color:green">assign a damage parameter</span> and give it a value of my choice when creating the spawned item.
-### Does it support GAS (Gameplay Ability System)?
-While this plugins doesn't directly integrate GAS for dependency reasons, it has been used before with it and all concepts of the plugin are friendly to it, so you can easily integrate it in your projects.
+
+### Can items be stacked?
+Yes of course, all items can be stacked to the limits you define.
+Different items can stack differently too.
 
 ## Design pillars of the plugin
 This plugin is designed to be:
