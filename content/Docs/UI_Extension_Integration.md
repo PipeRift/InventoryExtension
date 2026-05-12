@@ -1,5 +1,4 @@
 ---
-title: UI Extension Integration
 ---
 # UI Extension integration
 [UI Extension](https://x157.github.io/UE5/UIExtension/) is a plugin provided by Epic Games in Lyra.

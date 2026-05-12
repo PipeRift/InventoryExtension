@@ -1,5 +1,4 @@
 ---
-title: GAS Integration
 ---
 # Gameplay Ability System integration
 [Gameplay Ability System](https://dev.epicgames.com/documentation/unreal-engine/gameplay-ability-system-for-unreal-engine) or GAS is a plugin provided by Epic Games.
