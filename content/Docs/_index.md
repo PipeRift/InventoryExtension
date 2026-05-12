@@ -25,9 +25,15 @@ For installing manually, you can do it like any other plugin ([See how](https://
 > 
 > ![](Assets/20260409_1.png)
 
+## Extras
+Inventory Extension provides optional extra plugins and content to integrate with additional dependencies.
+- [GAS Integration]({{< ref "GAS_Integration.md" >}})
+- [UI Extension Integration]({{< ref "UI_Extension_Integration.md" >}})
 ## FAQ
 ### Does it support GAS (Gameplay Ability System)?
 While this plugins doesn't directly integrate GAS for dependency reasons, it has been used before with it and all concepts of the plugin are friendly to it, so you can easily integrate it in your projects.
+
+As a bonus, the plugin does provide a basic GAS integration plugin you can install manually. See [GAS Integration]({{< ref "GAS_Integration.md" >}}).
 
 ### Can Items be created in runtime?
 Yes. You have two main ways. You can create item descriptor assets in runtime, or you can use parameters to customize the properties of an item, or both.

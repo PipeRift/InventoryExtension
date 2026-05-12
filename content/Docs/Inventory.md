@@ -8,45 +8,36 @@ The main module of the plugin, providing networked inventories, items, and exten
 Items follow a hierarchical relationship:<br>
 **Item Descriptor (Asset) -> Item (Struct)**
 ![Inventory Architecture](Assets/20260419.png)
-
 ### Item Descriptor
 `UIEItemDescriptor` -- <span style="color:#ba6ed8">Data Asset</span>
 
-Item descriptors define an item statically.
-They are modular using [Fragments](#item-fragment) for static logic and [Parameters](#item-parameter) for runtime data.
+Item descriptors define an item statically, as an inmutable asset.
+Items are made modular using [Fragments](#item-fragment) to reuse logic, and [Parameters](#item-parameter) for runtime data.
 
-The two most defining elements of a descriptor are *Fragments* and *Parameters*.
+The two most defining elements of a descriptor are *Fragments* and *Parameters*:
 ![](Assets/20260419_6.png)
-
-### Item
-`FIEItem` -- <span style="color:#6e72d8">Struct</span> -- <span style="color:yellow">Replicates</span>
-
-When we work with items we usually refer to Struct instances of items (`FIEItem`).
-
-Unlike other inventory systems in unreal, items are not uobjects, so they can be copied and worked with out of the box like any other struct.
-
 ### Item Fragment
 `UIEItemFragment` -- <span style="color:#ba6ed8">UObject</span> -- Inside a Descriptor
 
-An Item Descriptor can have one or more *Fragments* that define the capabilities of the item.
-Item Fragments are blueprints and can be scripted both in CPP and in blueprints.
+An Item Descriptor can have **one or more *Fragments*** that define the capabilities of the item.
+Usually you want one unique fragment per item descriptor (*e.g An Item can only have one "Equippable" fragment*), but multiple of the same are allowed too (*e.g you may show two widgets when an item is equipped*).
 
-Fragments built into the plugin:
-- **Instantiable**: (Provided with the plugin)
-  Can this item be "physically" in the world? How should it look?
-- **UIExtension**: (Provided with the plugin. Requires Epic's UIExtension plugin.)
-  Should the Item show in UI, where and how?
+**Item Fragments are** blueprintable and can be **scripted** both **in C++ and blueprints**.
 
-Custom fragment examples you could implement:
+The plugin does provide some fragments out of the box:
+- **Instantiable**: Can this item be "physically" in the world? How should it look?
+- **UIExtension**: *(Inside UIExtension integration plugin)* Should the Item show in UI, where and how?
+
+Examples of fragment you can implement:
 - **Equippable**: The item can be equipped. Which hand? Is it a weapon? Does it have ammo?
 - **Spawnable**: The item can spawn randomly in the world. How should it do it? How many times?
 
 If you are working with GAS, fragments can do things like grant abilities when the item is added or on events, remove them when the item is removed, apply effects, etc.
+See [GAS Integration]({{< ref "GAS_Integration.md" >}})
 
 > [!TIP]- You can add a display names and icons to item fragments for better readability
 > 1. ![](Assets/20260419_4.png)
 > 2. ![](Assets/20260419_5.png)
-
 ### Item Parameter
 `FIEItemParameter` -- <span style="color:#6e72d8">Struct</span> -- <span style="color:yellow">Replicates</span> -- Inside a Descriptor or an Item
 
@@ -55,12 +46,20 @@ Parameters are runtime data bound to an item instance (`FIEItem`) and identified
 
 > [!IMPORTANT] **Overrides**
 > If a parameter is modified on an `FIEItem`, it **overrides** the default value in its `UIEItemDescriptor`.
+### Item
+`FIEItem` -- <span style="color:#6e72d8">Struct</span> -- <span style="color:yellow">Replicates</span>
 
+When we work with items we usually refer to item instances as items (`FIEItem`).
+
+Unlike other inventory systems, **items are not uobjects**:
+- They can be read, written, copied or stored like any other struct. Without special functions to do so, or complex implications in their logic.
+- **Items** are considerably **cheaper, faster and lighter** (in memory) than other systems based on objects. Not only because they are structs, but also because they rely on static uobjects and reduce the data they hold only to what needs changing in runtime.
+As a result you can have thousands, or tens of thousands of item instances simultaneously in the game without too much of a problem.
 ### Inventory Component
 `UIEInventoryComponent` -- <span style="color:#6eccd8">Actor Component</span> -- <span style="color:yellow">Replicates</span>
 
 A component that holds many items in order. Can have custom behavior.
-
+Inventories hold items through Inventory Slots.
 #### Settings
 The tooltips of the inventory have detailed tooltips that explain their purpose, but here are some:
 ![](Assets/20260430_4.png)
@@ -84,7 +83,7 @@ Represents occupied space inside an inventory. Usually contains an item, but may
 
 ---
 
-## 2. Usage & Workflow
+## 2. Usage
 
 ### Inventories
 #### Adding Items
@@ -166,10 +165,14 @@ While some parameters can be simple literals like ints, floats or bools, others 
 
 Here is how to define them:
 
-> [!Note]
-> Support for **user defined structs** may come in the future.
+{{< details title="Editor" closed="true" >}}
+Item Parameters can be created in editor as **User Defined Structs**.
+1. From the content browser, create an User Defined Struct ![](Assets/20260512.png)
+2. Add any fields you need to the struct![](Assets/20260512_2.png)
+{{< /details >}}
 
 {{< details title="C++" closed="true" >}}
+Parameter types can be defined in C++. It is recommended (but optional) to inherit from FIEItemParameter.
 ```cpp
 #include <IEItemParameter.h>
 
@@ -190,7 +193,10 @@ struct FItemParam_Ammo : public FIEItemParameter
 
 > [!Tip]
 > Items can be nested inside parameters, essentially being "contained" inside.
-> {{< details title="C++" closed="true" >}}
+> {{< details title="Editor" closed="false" >}}
+> ![](Assets/20260512_1.png)
+> {{< /details >}}
+> {{< details title="C++" closed="false" >}}
 > ```cpp
 > USTRUCT(BlueprintType, DisplayName = "Weapon")
 >struct FItemParam_Weapon : public FIEItemParameter
@@ -206,8 +212,22 @@ struct FItemParam_Ammo : public FIEItemParameter
 > ```
 > {{< /details >}}
 
+> [!Note]
+> Binding tags to specific parameter types, making editing much faster, will be supported in the future
+##### Assigning defaults
+By **default parameters** we refer to parameters statically defined in the **Item Descriptor**.<br>**They will not change in runtime.**
 
+You can simply open the item descriptor and edit them at your will.
+Each parameter has a tag that identifies it and the data type. For example a parameter with tag `Inventory.Param.Count` expects an **Integer** parameter type.
+##### Assigning overrides
+When we want to add or modify a parameter in an instance of an item (`FIEItem`), we refer to it as overriding a parameter.
 
+- If the item **has a default parameter** with the same tag: Overriding will hide the default value and when getting it we will return the new value instead.
+- If the item **doesn't have a default parameter** with the same tag: Overriding will set the value and return it when getting it.
+##### Deleting overrides
+When we delete an override, we simply do the opposite:
+- If there is a default value: Getting the parameter will get the default value.
+- If there is no default value: Getting the parameter will fail.
 
 #### Dropping
 
