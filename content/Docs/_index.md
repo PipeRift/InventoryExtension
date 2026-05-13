@@ -2,8 +2,6 @@
 title: Inventory Extension
 toc: true
 ---
-
-
 A 3-in-1 inventory system for Unreal Engine with **inventories**, **looting** and **crafting**.
 
 ## FAB & Installation

@@ -1,7 +1,7 @@
 ---
+title: Inventory
 weight: "1"
 ---
-# Inventory
 The main module of the plugin, providing networked inventories, items, and extensible data & behavior.
 
 ## 1. Architecture
@@ -96,7 +96,7 @@ If there is not enough space for a certain Item, that is considered "**Excess**"
 {{< /details >}}
 
 {{< details title="C++" closed="true" >}}
-```cpp
+```cpp {linenos=table}
 // Add one item
 Inventory->AddItem(Item, Excess);
 // Add multiple items
@@ -138,7 +138,7 @@ Fragments must inherit `UIEItemFragment`.
 {{< /details >}}
 
 {{< details title="C++" closed="true" >}}
-```cpp
+```cpp {linenos=table}
 #include <IEItemDescriptor.h>
 
 UCLASS(Meta = (DisplayName = "My Fragment"))
@@ -173,7 +173,7 @@ Item Parameters can be created in editor as **User Defined Structs**.
 
 {{< details title="C++" closed="true" >}}
 Parameter types can be defined in C++. It is recommended (but optional) to inherit from FIEItemParameter.
-```cpp
+```cpp {linenos=table}
 #include <IEItemParameter.h>
 
 // This parameter example represents ammunition, with a type and count
@@ -197,7 +197,7 @@ struct FItemParam_Ammo : public FIEItemParameter
 > ![](Assets/20260512_1.png)
 > {{< /details >}}
 > {{< details title="C++" closed="false" >}}
-> ```cpp
+> ```cpp {linenos=table}
 > USTRUCT(BlueprintType, DisplayName = "Weapon")
 >struct FItemParam_Weapon : public FIEItemParameter
 >{
@@ -260,7 +260,7 @@ We use the inventory slot of the item for this.
 {{< /details >}}
 
 {{< details title="C++" closed="true" >}}
-```cpp
+```cpp {linenos=table}
 // Get the slot we will drop
 UIEInventorySlot* Slot = Inventory->FindFirstSlotByItem(ItemDescriptor);
 // If it is valid
@@ -276,7 +276,7 @@ Items can also be spawned without an inventory, only spawning an item actor as r
 {{< /details >}}
 
 {{< details title="C++" closed="true" >}}
-```cpp
+```cpp {linenos=table}
 Item.Spawn(...);
 ```
 {{< /details >}}

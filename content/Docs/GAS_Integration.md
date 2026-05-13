@@ -1,6 +1,6 @@
 ---
+title: GAS Integration
 ---
-# Gameplay Ability System integration
 [Gameplay Ability System](https://dev.epicgames.com/documentation/unreal-engine/gameplay-ability-system-for-unreal-engine) or GAS is a plugin provided by Epic Games.
 
 While **Inventory Extension** does not directly depend on GAS to keep it lightweight and portable, we understand its common for inventories to interact with GAS in projects that use it.

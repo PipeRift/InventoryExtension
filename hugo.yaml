@@ -51,3 +51,8 @@ params:
 
   imageZoom:
     enable: true
+
+security:
+  http:
+    urls:
+      - 'https://cdn.jsdelivr.net'

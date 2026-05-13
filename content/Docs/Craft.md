@@ -1,7 +1,7 @@
 ---
+title: Craft
 weight: "2"
 ---
-# Craft
 Crafting allow items to be created from other items using recipes.
 
 > [!Important]

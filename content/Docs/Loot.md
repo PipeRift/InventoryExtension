@@ -1,7 +1,7 @@
 ---
+title: Loot
 weight: "3"
 ---
-# Loot
 Looting provides functionality to select items randomly from "item queues".
 
 

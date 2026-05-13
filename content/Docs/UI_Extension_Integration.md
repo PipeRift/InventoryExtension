@@ -1,6 +1,6 @@
 ---
+title: UI Extension Integration
 ---
-# UI Extension integration
 [UI Extension](https://x157.github.io/UE5/UIExtension/) is a plugin provided by Epic Games in Lyra.
 
 While **Inventory Extension** does not directly depend on Lyra or UI Extension to keep it lightweight and portable, we understand its common for items to need displaying widgets in projects with this plugin.
