@@ -233,8 +233,23 @@ When we delete an override, we simply do the opposite:
 
 Items can be dropped into the world *if they contain an "**Instantiable**" fragment*.
 
-This fragment defines which actor class to use (though a default one from settings can be used), but this actor class must implement **InstantiatedItem** interface.
-<img src="../Assets/20260430_6.png" width="75%"/>
+This fragment defines which actor class to use (though a default one from settings can be used). The actor class must implement **InstantiatedItem** interface.
+##### Making an Instantiated Item Actor
+This can be done in Blueprints and C++. The process is the same.
+For blueprints:
+1. Create an Item (`FIEItem`) property ![](Assets/20260513_2.png)
+2. Add the Instantiated Item interface<img src="../Assets/20260430_6.png" width="75%"/>
+3. Assign that item in **SetItem** and **GetItem** functions
+   ![](Assets/20260513_3.png) ![](Assets/20260513_4.png)
+4. Now, we can customize how the actor looks based on the item.
+   As an example: Lets read the name and mesh of an item and pass it to the relevant components. Keep in mind this is only a simple example, you can do much more than this.![](Assets/20260513_6.png) ![](Assets/20260513_9.png)
+   > [!Tip]
+   > If you want to update the actor also when you modify it or add it to the scene, you can call this Update function from **Construction** ![](Assets/20260513_8.png)
+5. We can add the actor to the scene now and see this working: ![](Assets/20260513_10.png)
+
+
+> [!Tip]
+> You can drag and drop instantiable items directly into the scene. If they are setup correctly as instantiable, their actor will be spawned.![](Assets/20260513.gif)
 
 ##### Dropping from an Inventory
 Items can be dropped from an inventory, optionally removing them from the inventory, and spawning an item actor as requested.
