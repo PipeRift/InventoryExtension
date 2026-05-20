@@ -8,7 +8,6 @@ weight: "3"
 > [!Important]
 > If you have not already, it is recommended to read about  [Inventory]({{< ref "Inventory.md" >}})  before this page.
 
-> [!Warning] Documentation In Progress
 ## 1. Architecture
 ### Item Queue
 `FIEItemQueue` -- <span style="color:#6e72d8">Struct</span>
