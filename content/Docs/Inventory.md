@@ -81,6 +81,11 @@ The tooltips of the inventory have detailed tooltips that explain their purpose,
 
 Represents occupied space inside an inventory. Usually contains an item, but may be empty.
 
+### Item List
+`UIEItemList` -- <span style="color:#ba6ed8">Data Asset</span>
+
+This asset represents an static list of items. Its use is usually focused towards looting, but not limited to it (hence why it is placed in the Inventory module).
+
 ---
 
 ## 2. Usage
